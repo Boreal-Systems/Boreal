@@ -1,0 +1,89 @@
+/* ==========================================================================
+   BOREAL — responsive.css
+   Mobile-first overrides via max-width breakpoints
+   ========================================================================== */
+
+/* ---------- Tablets (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  :root { --header-h: 68px; }
+
+  .diff-item { flex-basis: calc(33.333% - var(--sp-3)); }
+  .footer-col:last-child { flex-basis: 100%; }
+}
+
+/* ---------- Navegação mobile (<= 860px) ---------- */
+@media (max-width: 860px) {
+  .nav-toggle { display: flex; }
+
+  .header-cta .btn--ghost { display: none; }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+    background: var(--navy-950);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sp-5);
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease-standard);
+  }
+
+  .nav[data-open="true"] {
+    transform: translateX(0);
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+
+  .nav__list a { font-size: 1.3rem; }
+
+  .header-cta { flex-direction: column; }
+}
+
+/* ---------- Celulares grandes (<= 768px) ---------- */
+@media (max-width: 768px) {
+  section { padding-block: var(--sp-6); }
+
+  h2.section-title { font-size: clamp(1.6rem, 5vw, 2.1rem); }
+
+  .grid--2 > *,
+  .grid--3 > * { flex-basis: 100%; }
+
+  .diff-item { flex-basis: calc(50% - var(--sp-3)); }
+
+  .footer-brand { flex-basis: 100%; }
+
+  .cta-actions { flex-direction: column; align-items: center; }
+
+  .split__content,
+  .split__media { flex-basis: 100%; }
+  .split--reverse .split__media { order: -1; }
+
+  .portfolio-card { flex-basis: 100%; }
+
+  .contact-info-card,
+  .contact-form { flex-basis: 100%; }
+}
+
+/* ---------- Celulares pequenos (<= 480px) ---------- */
+@media (max-width: 480px) {
+  .container { padding-inline: var(--sp-2); }
+
+  .diff-item { flex-basis: calc(50% - var(--sp-3)); }
+
+  .icon-card { flex-direction: column; }
+
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .brand span { display: none; }
+
+  .form-row .field { flex-basis: 100%; }
+}
