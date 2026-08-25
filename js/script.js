@@ -1,90 +1,82 @@
-/* ==========================================================================
-   BOREAL — script.js
-   JavaScript puro, sem dependências externas.
-   ========================================================================== */
+(function(){
+'use strict';
 
-(function () {
-  'use strict';
+/* ---------- Rede animada de fundo (canvas) ---------- */
+var c = document.getElementById('net'), x = c.getContext('2d');
+var pts = [], N = 70, mouse = {x:-999,y:-999}, scrollY = 0;
+var colors = ['45,212,191','52,211,153','255,63,201']; // teal, green, pink
 
-  /* ---------- Menu hambúrguer (mobile) ---------- */
-  var toggle = document.querySelector('.nav-toggle');
-  var nav = document.querySelector('.nav');
-
-  if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-      nav.setAttribute('data-open', String(!isOpen));
-      document.body.style.overflow = isOpen ? '' : 'hidden';
+function resize(){ c.width = innerWidth; c.height = innerHeight; }
+function init(){
+  pts = [];
+  for(var i=0;i<N;i++){
+    pts.push({
+      x: Math.random()*innerWidth,
+      y: Math.random()*innerHeight,
+      vx: (Math.random()-.5)*.35,
+      vy: (Math.random()-.5)*.35,
+      c: colors[i%3]
     });
+  }
+}
+function step(){
+  x.clearRect(0,0,c.width,c.height);
+  var drift = scrollY * 0.00006; // leve deslocamento com o scroll
 
-    /* Fecha o menu ao clicar em um link (mobile) */
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        nav.setAttribute('data-open', 'false');
-        document.body.style.overflow = '';
-      });
-    });
+  for(var i=0;i<pts.length;i++){
+    var p = pts[i];
+    p.x += p.vx + drift;
+    p.y += p.vy;
+    if(p.x<0) p.x=c.width; if(p.x>c.width) p.x=0;
+    if(p.y<0) p.y=c.height; if(p.y>c.height) p.y=0;
 
-    /* Fecha o menu com a tecla Esc */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        toggle.setAttribute('aria-expanded', 'false');
-        nav.setAttribute('data-open', 'false');
-        document.body.style.overflow = '';
+    x.beginPath();
+    x.fillStyle = 'rgba('+p.c+',.8)';
+    x.arc(p.x,p.y,1.6,0,Math.PI*2);
+    x.fill();
+  }
+  for(var i=0;i<pts.length;i++){
+    for(var j=i+1;j<pts.length;j++){
+      var a=pts[i], b=pts[j];
+      var dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140){
+        x.strokeStyle = 'rgba(45,212,191,'+(0.16*(1-d/140))+')';
+        x.lineWidth = 1;
+        x.beginPath(); x.moveTo(a.x,a.y); x.lineTo(b.x,b.y); x.stroke();
       }
-    });
+    }
   }
+  requestAnimationFrame(step);
+}
+resize(); init(); step();
+addEventListener('resize', function(){ resize(); init(); });
+addEventListener('scroll', function(){ scrollY = window.scrollY; }, {passive:true});
 
-  /* ---------- Header sólido ao rolar a página ---------- */
-  var header = document.querySelector('.site-header');
-  if (header) {
-    var onScroll = function () {
-      if (window.scrollY > 12) {
-        header.style.background = 'rgba(6, 15, 32, 0.96)';
-      } else {
-        header.style.background = 'rgba(6, 15, 32, 0.82)';
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+/* ---------- Menu mobile ---------- */
+var burger = document.getElementById('burger'), nav = document.getElementById('mobileNav');
+burger.addEventListener('click', function(){
+  var open = burger.getAttribute('aria-expanded') === 'true';
+  burger.setAttribute('aria-expanded', String(!open));
+  nav.classList.toggle('translate-x-full', open);
+  document.body.style.overflow = open ? '' : 'hidden';
+});
+nav.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    burger.setAttribute('aria-expanded','false');
+    nav.classList.add('translate-x-full');
+    document.body.style.overflow = '';
+  });
+});
 
-  /* ---------- Ano dinâmico no rodapé ---------- */
-  var yearEl = document.querySelector('[data-year]');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+/* ---------- Ano + formulário ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ---------- Validação simples do formulário de contato ---------- */
-  var form = document.querySelector('.contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var feedback = form.querySelector('.form-feedback');
-      var required = form.querySelectorAll('[required]');
-      var valid = true;
-
-      required.forEach(function (field) {
-        if (!field.value.trim()) {
-          valid = false;
-          field.setAttribute('aria-invalid', 'true');
-        } else {
-          field.removeAttribute('aria-invalid');
-        }
-      });
-
-      if (!feedback) return;
-
-      if (valid) {
-        feedback.textContent = 'Mensagem pronta para envio! Conecte este formulário ao seu backend ou serviço de e-mail preferido.';
-        feedback.dataset.state = 'success';
-        form.reset();
-      } else {
-        feedback.textContent = 'Por favor, preencha os campos obrigatórios antes de enviar.';
-        feedback.dataset.state = 'error';
-      }
-    });
-  }
+var form = document.getElementById('contactForm');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var msg = document.getElementById('formMsg');
+  msg.textContent = 'Mensagem pronta para envio! Conecte este formulário ao seu backend ou serviço de e-mail preferido.';
+  msg.className = 'text-xs min-h-[1em] text-teal';
+  form.reset();
+});
 })();
