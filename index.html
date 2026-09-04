@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boreal — Impulsionamos Empresas, Criamos Oportunidades</title>
+<title>Boreal — Conectamos Empresas, Criamos Oportunidades</title>
 <meta name="description" content="A Boreal conecta empresas e transforma contato em oportunidade real de negócio através de inteligência comercial e tecnologia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/output.css">
-
 <style>
   html{scroll-behavior:smooth}
   body{background:#050a14}
@@ -31,29 +29,31 @@
 <header class="fixed inset-x-0 top-0 z-30 backdrop-blur-md bg-navy-950/70 border-b border-white/5">
   <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
     <a href="#inicio" class="font-logo font-bold text-xl tracking-wide text-white">BOREAL<span class="text-teal">.</span></a>
-    <nav class="hidden md:flex items-center gap-8 text-sm">
+
+    <!-- <nav class="hidden md:flex items-center gap-8 text-sm">
       <a href="#inicio" class="hover:text-teal transition">Início</a>
       <a href="#sobre" class="hover:text-teal transition">Sobre</a>
       <a href="#contato" class="hover:text-teal transition">Contato</a>
-    </nav>
-    <a href="#contato" class="hidden md:inline-block text-sm font-semibold px-4 py-2 rounded-md bg-gradient-to-r from-teal to-agreen text-navy-950 hover:opacity-90 transition">Fale com a Boreal</a>
-    <button id="burger" aria-label="Abrir menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
+    </nav> -->
+    
+    <!-- <a href="#contato" class="hidden md:inline-block text-sm font-semibold px-4 py-2 rounded-md bg-gradient-to-r from-teal to-agreen text-navy-950 hover:opacity-90 transition">Fale com a Boreal</a> -->
+
+    <!-- <button id="burger" aria-label="Abrir menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
       <span class="w-6 h-0.5 bg-white transition"></span>
       <span class="w-6 h-0.5 bg-white transition"></span>
       <span class="w-6 h-0.5 bg-white transition"></span>
-    </button>
+    </button> -->
   </div>
 </header>
 
 <!-- MOBILE NAV -->
-<div id="mobileNav" class="fixed inset-0 z-20 bg-navy-950/98 flex flex-col items-center justify-center gap-8 text-xl translate-x-full md:hidden">
+<!-- <div id="mobileNav" class="fixed inset-0 z-20 bg-navy-950/98 flex flex-col items-center justify-center gap-8 text-xl translate-x-full md:hidden">
   <a href="#inicio" class="text-white hover:text-teal">Início</a>
   <a href="#sobre" class="text-white hover:text-teal">Sobre</a>
   <a href="#contato" class="text-white hover:text-teal">Contato</a>
-</div>
+</div> -->
 
 <main class="relative z-10">
-
   <!-- INÍCIO -->
   <section id="inicio" class="min-h-screen flex items-center px-5 pt-16">
     <div class="max-w-6xl mx-auto w-full">
@@ -120,13 +120,14 @@
     </div>
   </section>
 
+
   <!-- CONTATO -->
   <section id="contato" class="py-24 px-5 border-t border-white/5">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
       <div>
         <p class="font-mono text-xs tracking-widest text-pink-neon uppercase mb-3 flex items-center gap-2"><span class="w-6 h-px bg-pink-neon"></span>Vamos conversar?</p>
         <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Conecte sua empresa à <span class="grad-text">Boreal</span></h2>
-        <p class="mt-4 text-slate-400 max-w-md">Criamos oportunidades. Construímos resultados. Fale com a gente pelo canal que preferir.</p>
+        <p class="mt-4 text-slate-400 max-w-md">Conectamos oportunidades. Construímos resultados. Fale com a gente pelo canal que preferir.</p>
 
         <ul class="mt-8 space-y-3 text-sm">
           <li class="flex items-center gap-3"><span class="text-teal">◆</span><a href="https://wa.me/5585996833293" target="_blank" rel="noopener" class="hover:text-teal">(85) 99683-3293 — WhatsApp</a></li>
@@ -135,22 +136,13 @@
         </ul>
       </div>
 
-      <form id="contactForm" class="p-6 rounded-xl bg-navy-900/70 border border-white/5 space-y-4">
-        <div>
-          <label class="text-xs font-semibold text-slate-300">Nome completo *</label>
-          <input required type="text" class="mt-1 w-full rounded-md bg-navy-950 border border-white/10 px-3 py-2.5 text-sm focus:outline-none focus:border-teal">
-        </div>
-        <div>
-          <label class="text-xs font-semibold text-slate-300">E-mail *</label>
-          <input required type="email" class="mt-1 w-full rounded-md bg-navy-950 border border-white/10 px-3 py-2.5 text-sm focus:outline-none focus:border-teal">
-        </div>
-        <div>
-          <label class="text-xs font-semibold text-slate-300">Mensagem *</label>
-          <textarea required rows="4" class="mt-1 w-full rounded-md bg-navy-950 border border-white/10 px-3 py-2.5 text-sm focus:outline-none focus:border-teal"></textarea>
-        </div>
-        <button class="w-full py-3 rounded-md font-semibold bg-gradient-to-r from-teal via-agreen to-pink-neon text-navy-950 hover:opacity-90 transition">Enviar mensagem</button>
-        <p id="formMsg" class="text-xs min-h-[1em]"></p>
-      </form>
+      <div class="p-6 rounded-xl bg-navy-900/70 border border-white/5 flex flex-col items-center text-center">
+        <p class="text-xs font-semibold text-slate-300 mb-4">Aponte a câmera do seu celular para o QR Code</p>
+        <a href="https://qr.codes/tQKxeT" target="_blank" rel="noopener" class="p-3 rounded-lg bg-white glow">
+          <img src="images/qrcode.png" alt="QR Code de contato da Boreal" width="220" height="220" class="w-48 h-48 sm:w-56 sm:h-56">
+        </a>
+        <p class="mt-4 text-xs text-slate-500">ou acesse <a href="https://linktr.ee/BorealSystems" target="_blank" rel="noopener" class="text-teal hover:underline">https://linktr.ee/BorealSystems</a></p>
+      </div>
     </div>
   </section>
 

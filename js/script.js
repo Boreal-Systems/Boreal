@@ -68,15 +68,6 @@ nav.querySelectorAll('a').forEach(function(a){
   });
 });
 
-/* ---------- Ano + formulário ---------- */
+/* ---------- Ano ---------- */
 document.getElementById('year').textContent = new Date().getFullYear();
-
-var form = document.getElementById('contactForm');
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  var msg = document.getElementById('formMsg');
-  msg.textContent = 'Mensagem pronta para envio! Conecte este formulário ao seu backend ou serviço de e-mail preferido.';
-  msg.className = 'text-xs min-h-[1em] text-teal';
-  form.reset();
-});
 })();
