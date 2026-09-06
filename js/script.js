@@ -54,19 +54,21 @@ addEventListener('scroll', function(){ scrollY = window.scrollY; }, {passive:tru
 
 /* ---------- Menu mobile ---------- */
 var burger = document.getElementById('burger'), nav = document.getElementById('mobileNav');
-burger.addEventListener('click', function(){
-  var open = burger.getAttribute('aria-expanded') === 'true';
-  burger.setAttribute('aria-expanded', String(!open));
-  nav.classList.toggle('translate-x-full', open);
-  document.body.style.overflow = open ? '' : 'hidden';
-});
-nav.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click', function(){
-    burger.setAttribute('aria-expanded','false');
-    nav.classList.add('translate-x-full');
-    document.body.style.overflow = '';
+if(burger && nav){
+  burger.addEventListener('click', function(){
+    var open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('translate-x-full', open);
+    document.body.style.overflow = open ? '' : 'hidden';
   });
-});
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.setAttribute('aria-expanded','false');
+      nav.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+    });
+  });
+}
 
 /* ---------- Ano ---------- */
 document.getElementById('year').textContent = new Date().getFullYear();
